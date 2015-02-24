@@ -13,9 +13,9 @@
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Ant>
-      <targets></targets>
-    </hudson.tasks.Ant>
+      <hudson.tasks.Phing>
+          <targets></targets>
+      </hudson.tasks.Phing>
   </builders>
   <publishers>
     <hudson.plugins.checkstyle.CheckStylePublisher>
