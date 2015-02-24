@@ -5,7 +5,7 @@
 TAG_LAST="$(git describe --abbrev=0 --tags)"
 TAG_PATCH="$(git describe --abbrev=0 --tags | cut -f 3 -d .)"
 TAG_MINOR="$(git describe --abbrev=0 --tags | cut -f 2 -d .)"
-TAG_MAJOR="$(git describe --abbrev=0 --tags | cut -f 1 -d .)"
+TAG_MAJOR="$(git describe --abbrev=0 --tags | cut -f 1 -d . | sed -e 's/v//g')"
 
 if [ "$1" = "patch" ]; then
     NEW_TAG="${TAG_MAJOR}.${TAG_MINOR}.$((TAG_PATCH+1))"
