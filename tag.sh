@@ -11,7 +11,7 @@ if [ "$1" = "patch" ]; then
     NEW_TAG="${TAG_MAJOR}.${TAG_MINOR}.$((TAG_PATCH+1))"
 elif [ "$1" = "minor" ]; then
     NEW_TAG="${TAG_MAJOR}.$(($TAG_MINOR+1)).0"
-elif [ "$1" = "patch" ]; then
+elif [ "$1" = "major" ]; then
     NEW_TAG="$(($TAG_MAJOR+1)).0.0"
 else
     echo "Failed. Specify version bump type. Usage: './tag.sh [patch|minor|major]'"
