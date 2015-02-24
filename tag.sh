@@ -7,7 +7,7 @@ TAG_PATCH="$(git describe --abbrev=0 --tags | cut -f 3 -d .)"
 TAG_MINOR="$(git describe --abbrev=0 --tags | cut -f 2 -d .)"
 TAG_MAJOR="$(git describe --abbrev=0 --tags | cut -f 1 -d .)"
 
-NEW_TAG="${TAG_MAJOR}.${TAG_MINOR}.$(($TAG_PATCH+1))"
+NEW_TAG="${TAG_MAJOR}.$(($TAG_MINOR+1)).0"
 
 git add -A
 NOW=$(date +"%d-%m-%Y %T")
