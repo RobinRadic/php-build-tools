@@ -60,16 +60,7 @@ php phar-composer.phar build rossriley/phrocco:dev-master
 
 chmod +x *.phar
 
-TAG_LAST="$(git describe --abbrev=0 --tags)"
-TAG_PATCH="$(git describe --abbrev=0 --tags | cut -f 3 -d .)"
-TAG_MINOR="$(git describe --abbrev=0 --tags | cut -f 2 -d .)"
-TAG_MAJOR="$(git describe --abbrev=0 --tags | cut -f 1 -d .)"
-
-NEW_TAG="${TAG_MAJOR}.${TAG_MINOR}.$(($TAG_PATCH+1))"
-
 git add -A
 NOW=$(date +"%d-%m-%Y %T")
-git commit -m "update @ ${NOW}"
+git commit -m "update .phar files @ ${NOW}"
 git push -u origin master
-
-tag ${NEW_TAG} "${NEW_TAG} @ ${NOW}"
