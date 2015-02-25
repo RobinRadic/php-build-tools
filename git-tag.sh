@@ -1,4 +1,34 @@
-#!/bin/sh
+#!/bin/bash
+
+MYDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+source "${MYDIR}/_main.sh"
+
+
+
+if [ "$is_help" == "true" ]; then
+    cat << EOF
+$(f bold)$(fc green)Git Auto Incremental Semantic Versioning Tagger$(f off)
+
+$(f bold)Name:          $(f off)$(fc cyan)git-tag.sh $(f off)
+$(f bold)Desc:          $(f off)- Checks out the current branch, pushes it to remote
+$(f bold)               $(f off)- Increments the given <type> by 1, compared to the latest tag, creates it and finally pushes it
+$(f bold)Arguments:     $(f off)
+    -t <type>              $(fc red)required$(f off) [patch|minor|major] - The type of increment you want to do
+    -h                     $(fc orange)optional$(f off) Show this help overview
+    -v                     $(fc orange)optional$(f off) Enable verbose output
+    -d                     $(fc orange)optional$(f off) Enable debug output
+$(f bold)Examples:      $(f off)
+    ./build/tools/git-tag.sh -t patch   $(fc green)# current(v1.2.1) to v1.2.2 $(f off)
+    ./build/tools/git-tag.sh -t minor   $(fc green)# current(v1.2.2) to v1.3.0 $(f off)
+    ./build/tools/git-tag.sh -t patch   $(fc green)# current(v1.3.0) to v1.3.1 $(f off)
+    ./build/tools/git-tag.sh -t major   $(fc green)# current(v1.3.1) to v2.0.0 $(f off)
+
+$(fc grey)Always execute scripts from the working directory, like shown in the examples$(f off)
+EOF
+    exit 0
+fi
+
+Echo "Doing $(f bold)$(fc orange)git-tag$(f off) $(f bold)${PWD}$(f off)"
 
 TAG_LAST="$(git describe --abbrev=0 --tags)"
 TAG_PATCH="$(git describe --abbrev=0 --tags | cut -f 3 -d .)"
