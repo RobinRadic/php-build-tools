@@ -3,14 +3,14 @@
     <property name="toolsdir" value="${project.basedir}/build/tools/"/>
     <property name="changelog.header" value="# Changelog"/>
     <property name="changelog.filename" value="CHANGELOG.md"/>
-    <property name="gitremote.url" value="https://github.com/"/>
+    <property name="gitremote.url" value="https://github.com"/>
     <property name="gitremote.owner" value="robinradic"/>
     <property name="gitremote.repo" value="${phing.project.name}"/>
 
     <if>
         <equals arg1="${phing.project.name}" arg2="change-me" />
         <then>
-            <fail message="This is the unmodified template. You need to change the project name and go over the other properties and verify they are valid." />
+            <fail message="You need to change the project name." />
         </then>
     </if>
 
@@ -19,11 +19,15 @@
     <target name="changelog">
         <delete file="${changelog.filename}" quiet="true" />
         <exec command='echo "${changelog.header} \n" >> ${changelog.filename}'/>
-        <exec command='git log --date=short --format="- [%cd](https://github.com/robinradic/blade-extensions/commit/%H) %gs %s  " >> ${changelog.filename}' logoutput="false"/>
+        <exec command='git log --date=short --format="- [%cd](${gitremote.url}/${gitremote.owner}/${gitremote.repo}/commit/%H) %gs %s  " >> ${changelog.filename}' logoutput="false"/>
         <echo message="Created markdown changelog: ${changelog.filename}" />
     </target>
 
-    <target name="build" depends="prepare,lint,phploc-ci,pdepend,phpcs-ci,phpcpd-ci,phpunit,phpdox,phpdoc" description=""/>
+    <target name="git.submodule.update">
+        <exec command="bash ${toolsdir}git-submodule-update.sh" dir="${project.basedir}" logoutput="true" />
+    </target>
+
+    <target name="build" depends="vendor,prepare,lint,phploc-ci,pdepend,phpcs-ci,phpcpd-ci,phpunit,phpdox,phpdoc" description=""/>
 
     <target name="clean" unless="clean.done" description="Cleanup build artifacts">
         <delete dir="${project.basedir}/build/api"/>
@@ -31,22 +35,28 @@
         <delete dir="${project.basedir}/build/logs"/>
         <delete dir="${project.basedir}/build/pdepend"/>
         <delete dir="${project.basedir}/build/phpdox"/>
+        <delete dir="${project.basedir}/build/phpdoxwd"/>
         <delete dir="${project.basedir}/build/phpdoc"/>
         <property name="clean.done" value="true"/>
     </target>
 
-    <target name="clean.vendor" unless="clean.vendor.done" depends="clean" description="Cleanup composer and vendor">
+    <target name="vendor" unless="vendor.done" description="Cleanup composer and vendor">
         <delete dir="${project.basedir}/vendor"/>
         <delete file="${project.basedir}/composer.lock"/>
-        <property name="clean.vendor.done" value="true"/>
+        <exec executable="composer" logoutput="true">
+            <arg line="install"/>
+        </exec>
+        <property name="vendor.done" value="true"/>
     </target>
 
-    <target name="prepare" unless="prepare.done" depends="clean.vendor" description="Prepare for build">
-        <mkdir dir="${project.basedir}/build/api"/>
+
+    <target name="prepare" unless="prepare.done" depends="clean,git.submodule.update" description="Prepare for build">
+
         <mkdir dir="${project.basedir}/build/coverage"/>
         <mkdir dir="${project.basedir}/build/logs"/>
         <mkdir dir="${project.basedir}/build/pdepend"/>
         <mkdir dir="${project.basedir}/build/phpdox"/>
+        <mkdir dir="${project.basedir}/build/phpdoxwd"/>
         <mkdir dir="${project.basedir}/build/phpdoc"/>
         <exec executable="composer" logoutput="true">
             <arg line="install"/>
