@@ -1,5 +1,9 @@
 #!/bin/bash
 
+MYDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+source "${MYDIR}/_main.sh"
+
+
 # phar-composer
 rm -f phar-composer.phar
 wget http://www.lueck.tv/phar-composer/phar-composer.phar
@@ -60,7 +64,5 @@ php phar-composer.phar build rossriley/phrocco:dev-master
 
 chmod +x *.phar
 
-git add -A
-NOW=$(date +"%d-%m-%Y %T")
-git commit -m "update .phar files @ ${NOW}"
-git push -u origin master
+
+bash ${MYDIR}/git-tag.sh patch
