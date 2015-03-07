@@ -7,7 +7,7 @@ LOCATION="/usr/local/bin"
 
 function _move {
     local NAME=$1
-    sudo mv -f "${NAME}.phar ${LOCATION}/${NAME}"
+    sudo cp -f "${NAME}.phar" "${LOCATION}/${NAME}"
     sudo chmod +x "${LOCATION}/${NAME}" # just to be sure
 }
 
