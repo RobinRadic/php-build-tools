@@ -6,9 +6,9 @@ git submodule update --init --recursive --remote --force
 # get out of detached head state
 git submodule foreach -q --recursive 'branch="$(git config -f $toplevel/.gitmodules submodule.$name.branch)"; git fetch --all; git checkout $branch; git pull'
 
-cp -f scripts/pre-commit .git/hooks/pre-commit
+cp -f resources/scripts/pre-commit .git/hooks/pre-commit
 echo "Added git pre-commit hook"
 #cp -f scripts/pre-push .git/hooks/pre-push
 #echo "Added git pre-push hook"
-cp -f build/tools/phing.phar phing
+#cp -f build/tools/phing.phar phing
 echo "Added phing"
