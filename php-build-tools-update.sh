@@ -1,14 +1,9 @@
 #!/bin/bash
 
-
-if [ -z "./.git/hooks/pre-commit" ]; then
-    echo "alash"
-fi
-
-exit
-
 MYDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "${MYDIR}/lib/_lib.sh"
+
+bash ./lib/git-submodule-update.sh
 
 #########################
 #   UPDATE PHAR FILES
@@ -81,6 +76,10 @@ chmod +x box.phar
 
 # chmod all PHAR archives to be executable
 chmod +x *.phar
+
+# ensure pre-commit hook
+cp -f ./scripts/pre-commit ./.git/hooks/pre-commit >> /dev/null
+chmod +x ./.git/hooks/pre-commit
 
 # tag it on git
 bash ${MYDIR}/lib/git-tag.sh patch
