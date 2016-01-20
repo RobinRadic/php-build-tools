@@ -10,59 +10,59 @@ bash ./lib/git-submodule-update.sh
 #########################
 
 # phar-composer
-rm -f phar-composer.phar
-wget http://www.lueck.tv/phar-composer/phar-composer.phar
+Exec rm -f phar-composer.phar
+Exec wget http://www.lueck.tv/phar-composer/phar-composer.phar
 
 # pdepend
-rm -f pdepend.phar
-wget http://static.pdepend.org/php/latest/pdepend.phar
+Exec rm -f pdepend.phar
+Exec wget http://static.pdepend.org/php/latest/pdepend.phar
 
 # phing
-rm -f phing.phar
-wget http://www.phing.info/get/phing-latest.phar
-mv phing-latest.phar phing.phar
+Exec rm -f phing.phar
+Exec wget http://www.phing.info/get/phing-latest.phar
+Exec mv phing-latest.phar phing.phar
 
 # phpab
-rm -f phpab.phar
-wget http://phpab.net/phpab-1.16.1.phar
-mv phpab-1.16.1.phar phpab.phar
+Exec rm -f phpab.phar
+Exec wget http://phpab.net/phpab-1.16.1.phar
+Exec mv phpab-1.16.1.phar phpab.phar
 
 # phpcpd
-rm -f phpcpd.phar
-wget https://phar.phpunit.de/phpcpd.phar
+Exec rm -f phpcpd.phar
+Exec wget https://phar.phpunit.de/phpcpd.phar
 
 # phpcs
-rm -f phpcs.phar
-wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+Exec rm -f phpcs.phar
+Exec wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
 
 # phpcbf
-rm -f phpcbf.phar
-wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+Exec rm -f phpcbf.phar
+Exec wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
 
 # phpdox
-rm -f phpdox.phar
-wget http://phpdox.de/releases/phpdox.phar
+Exec rm -f phpdox.phar
+Exec wget http://phpdox.de/releases/phpdox.phar
 
 # phploc
-rm -f phploc.phar
-wget https://phar.phpunit.de/phploc.phar
+Exec rm -f phploc.phar
+Exec wget https://phar.phpunit.de/phploc.phar
 
 # phpmd
-rm -f phpmd.phar
-wget http://static.phpmd.org/php/latest/phpmd.phar
+Exec rm -f phpmd.phar
+Exec wget http://static.phpmd.org/php/latest/phpmd.phar
 
 # phpunit
-rm -f phpunit.phar
-wget https://phar.phpunit.de/phpunit.phar
+Exec rm -f phpunit.phar
+Exec wget https://phar.phpunit.de/phpunit.phar
 
 # phpdoc
-rm -f phpdoc.phar
-wget http://www.phpdoc.org/phpDocumentor.phar
-mv phpDocumentor.phar phpdoc.phar
+Exec rm -f phpdoc.phar
+Exec wget http://www.phpdoc.org/phpDocumentor.phar
+Exec mv phpDocumentor.phar phpdoc.phar
 
 # phrocco
-rm -f phrocco.phar
-php phar-composer.phar build rossriley/phrocco:dev-master
+Exec rm -f phrocco.phar
+Exec php phar-composer.phar build rossriley/phrocco:dev-master
 
 # box2
 curl -LSs https://box-project.github.io/box2/installer.php | php
