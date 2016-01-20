@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+if [ -z "./.git/hooks/pre-commit" ]; then
+    echo "alash"
+fi
+
+exit
+
 MYDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "${MYDIR}/lib/_lib.sh"
 
