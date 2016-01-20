@@ -1,8 +1,11 @@
 #!/bin/bash
 
 MYDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-source "${MYDIR}/_main.sh"
+source "${MYDIR}/lib/_lib.sh"
 
+#########################
+#   UPDATE PHAR FILES
+#########################
 
 # phar-composer
 rm -f phar-composer.phar
@@ -34,21 +37,17 @@ wget https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
 rm -f phpcbf.phar
 wget https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
 
-
 # phpdox
 rm -f phpdox.phar
 wget http://phpdox.de/releases/phpdox.phar
-
 
 # phploc
 rm -f phploc.phar
 wget https://phar.phpunit.de/phploc.phar
 
-
 # phpmd
 rm -f phpmd.phar
 wget http://static.phpmd.org/php/latest/phpmd.phar
-
 
 # phpunit
 rm -f phpunit.phar
@@ -59,10 +58,22 @@ rm -f phpdoc.phar
 wget http://www.phpdoc.org/phpDocumentor.phar
 mv phpDocumentor.phar phpdoc.phar
 
+# phrocco
 rm -f phrocco.phar
 php phar-composer.phar build rossriley/phrocco:dev-master
 
+# box2
+curl -LSs https://box-project.github.io/box2/installer.php | php
+chmod +x box.phar
+
+
+
+#########################
+#   POST UPDATE STUFF
+#########################
+
+# chmod all PHAR archives to be executable
 chmod +x *.phar
 
-
-bash ${MYDIR}/git-tag.sh patch
+# tag it on git
+bash ${MYDIR}/lib/git-tag.sh patch
