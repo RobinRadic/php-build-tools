@@ -24,10 +24,10 @@ _mv composer
 Echo success "updated: composer"
 
 # phar-composer
-Exec rm -f phar-composer.phar
-Exec wget http://www.lueck.tv/phar-composer/phar-composer.phar
-_mv phar-composer
-Echo success "updated: phar-composer"
+#Exec rm -f phar-composer.phar
+#Exec wget http://www.lueck.tv/phar-composer/phar-composer.phar
+#_mv phar-composer
+#Echo success "updated: phar-composer"
 
 # sami
 Exec rm -f sami.phar
@@ -109,10 +109,10 @@ _mv phpdoc
 Echo success "updated: phpdoc"
 
 # phrocco
-Exec rm -f phrocco.phar
-Exec php bin/phar-composer build rossriley/phrocco:dev-master
-mv phrocco.phar bin/phrocco
-Echo success "updated: phrocco"
+#Exec rm -f phrocco.phar
+#Exec php bin/phar-composer build rossriley/phrocco:dev-master
+#mv phrocco.phar bin/phrocco
+#Echo success "updated: phrocco"
 
 # box2
 curl -LSs https://box-project.github.io/box2/installer.php | php
