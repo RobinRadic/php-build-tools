@@ -9,8 +9,8 @@ rm -rf $MYDIR/bin >> /dev/null
 mkdir $MYDIR/bin >> /dev/null
 
 _mv() {
+    Exec chmod +x $1.phar
     Exec mv $1.phar bin/$1
-    Exec chmod +x bin/$1
 }
 
 #########################
@@ -28,6 +28,19 @@ Echo success "updated: composer"
 #Exec wget http://www.lueck.tv/phar-composer/phar-composer.phar
 #_mv phar-composer
 #Echo success "updated: phar-composer"
+
+
+# php-cs-fixer
+Exec rm -f php-cs-fixer.phar
+Exec wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.13.1/php-cs-fixer.phar
+_mv php-cs-fixer
+Echo success "updated: php-cs-fixer"
+
+# php-cs-fixer-v2
+Exec rm -f php-cs-fixer-v2.phar
+Exec wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar
+_mv php-cs-fixer-v2
+Echo success "updated: php-cs-fixer-v2"
 
 # sami
 Exec rm -f sami.phar
@@ -51,12 +64,14 @@ Echo success "updated: pdepend"
 Exec rm -f phing.phar
 Exec wget http://www.phing.info/get/phing-latest.phar
 Exec mv phing-latest.phar bin/phing
+Exec chmod +x bin/phing
 Echo success "updated: phing"
 
 # phpab
 Exec rm -f phpab.phar
 Exec wget http://phpab.net/phpab-1.16.1.phar
 Exec mv phpab-1.16.1.phar bin/phpab
+Exec chmod +x bin/phpab
 Echo success "updated: phpab"
 
 # phpcpd
@@ -120,18 +135,3 @@ chmod +x box.phar
 _mv box
 Echo success "updated: box"
 
-
-
-#########################
-#   POST UPDATE STUFF
-#########################
-
-# chmod all PHAR archives to be executable
-chmod +x *.phar
-
-# ensure pre-commit hook
-cp -f ./scripts/pre-commit ./.git/hooks/pre-commit >> /dev/null
-chmod +x ./.git/hooks/pre-commit
-
-# tag it on git
-bash ${MYDIR}/lib/git-tag.sh patch

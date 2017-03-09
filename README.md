@@ -1,42 +1,32 @@
 PHP Build Tools
 =============================
 
-Largely taken from http://jenkins-php.org/.
+Downloads and optionally installs to local:
+- box
+- composer
+- pdepend
+- phing
+- phpab
+- phpcbf
+- phpcov
+- phpcpd
+- phpcs
+- phpdoc
+- php-cs-fixer (v1.13.1)
+- php-cs-fixer-v2 (latest)
+- phpdox
+- phploc
+- phpmd
+- phpunit
+- sami
 
-- Transferred to Phing
-- modified/added some stuff
+```bash
+git clone https://github.com/robinradic/php-build-tools
+cd php-build-tools
 
+# Update all tools. Downloads the latest releases and put's em in the "bin" directory
+./tools-update.sh
 
-### Overview
-- Intended use as submodule
-- Includes all of the major build tools as .phar archive.
-- Includes boilerplate phing build, phpdox, phpmd and phpunit templates
-- Includes jenkins job template, asuming http://jenkins-php.org/ has been installed
-- Also takes into account travis-ci
-
-
-### Installation
-In your project directory create `build` dir
-```sh
-mkdir build
-git submodule add -b master https://github.com/robinradic/php-build-tools build/tools
-cp build/tools/tpl-phpdox.xml build/phpdox.xml
-cp build/tools/tpl-phpmd.xml build/phpmd.xml
-cp build/tools/tpl-phpunit.xml build/phpunit.xml
-cp build/tools/tpl-travis-ci.xml build/travis-ci.xml
-cp build/tools/tpl-build.xml build.xml # copy to root dir
-# now you could optionally do something like
-# phing to root dir
-cp build/tools/phing.phar phing
-# add it to gitignore
-echo -e "\n/phing\n" >> .gitignore
-# test it out
-php phing
-# create a script directory, with bootstrap.sh (use after cloning) and githooks
-mkdir scripts
-touch scripts/pre-commit
-# etc...
+# Installs all tools to /usr/local/bin
+./tools-install-local.sh
 ```
-
-### Examples
-Any of my php
